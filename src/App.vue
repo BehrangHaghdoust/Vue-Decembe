@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-{{$store.state}}
+<!-- {{$store.state}} -->
 
   <router-view class="container" />
 </template>

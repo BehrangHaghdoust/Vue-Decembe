@@ -5,6 +5,9 @@ import Profile from '../views/Profile.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 
+//added for security setting
+import store from '../store/index'
+
 const routes = [
   {
     path: '/',
@@ -19,17 +22,22 @@ const routes = [
   {
     path: '/profile',
     name: 'Profile',
-    component: Profile
+    component: Profile,
+    meta: { loginRequired: true }
+
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: { loginRedirect: true }
   },
   {
     path: '/logout',
     name: 'Logout',
-    component: Logout
+    component: Logout,
+    meta: { loginRequired: true }
+
   },
 
 ]
@@ -37,6 +45,27 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.loginRequired)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (store.state.isAuthenticated) {
+      next()
+    } else {
+      next('/login')
+    }
+  } else if(to.matched.some(record => record.meta.loginRedirect)){
+    if (!store.state.isAuthenticated) {
+      next()
+    } else {
+      next('/profile')
+    }
+  }
+  else
+   {
+    next() // make sure to always call next()!
+  }
 })
 
 export default router
