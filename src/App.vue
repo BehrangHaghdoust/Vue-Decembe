@@ -1,22 +1,33 @@
 <template>
+  <Navbar />
+  {{ $store.state }}
+  <br />
+  <hr />
+  {{ $router }}
 
-<Navbar/>
-  <router-view class="container"/>
+  <router-view class="container" />
 </template>
 
 
 
 <script>
 // @ is an alias to /src
-import Navbar from '@/components/Navbar.vue'
-
+import Navbar from "@/components/Navbar.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Navbar
-  }
-}
+    Navbar,
+  },
+  watch: {
+    $route() {
+        this.$store.commit("onStart");
+    },
+  },
+  mounted() {
+    this.$store.commit("onStart");
+  },
+};
 </script>
 
 
@@ -33,13 +44,12 @@ export default {
   color: #2c3e50;
 }
 
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
 
-.navbar-brand{
+.navbar-brand {
   color: #2c3e50 !important;
 }
 #nav a.router-link-exact-active {
