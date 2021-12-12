@@ -17,6 +17,14 @@
               <router-link class="nav-link" to="/profile">Profile</router-link>
 
         </li>
+         <li class="nav-item">
+              <router-link class="nav-link" to="/login">Login</router-link>
+
+        </li>
+        <li class="nav-item">
+              <router-link class="nav-link" to="/logout">Logout</router-link>
+
+        </li>
 
       </ul>
       <form class="form-inline">

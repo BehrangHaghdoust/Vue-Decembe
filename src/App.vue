@@ -1,9 +1,6 @@
 <template>
   <Navbar />
-  {{ $store.state }}
-  <br />
-  <hr />
-  {{ $router }}
+{{$store.state}}
 
   <router-view class="container" />
 </template>
