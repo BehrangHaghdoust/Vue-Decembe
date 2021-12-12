@@ -4,6 +4,7 @@ import About from '../views/About.vue'
 import Profile from '../views/Profile.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
+import Register from '../views/Register.vue'
 
 //added for security setting
 import store from '../store/index'
@@ -37,6 +38,13 @@ const routes = [
     name: 'Logout',
     component: Logout,
     meta: { loginRequired: true }
+
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    meta: { loginRedirect: true }
 
   },
 
