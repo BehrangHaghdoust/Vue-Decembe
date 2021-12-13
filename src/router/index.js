@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Detail from '../views/Detail.vue'
 import About from '../views/About.vue'
 import Profile from '../views/Profile.vue'
+import Add from '../views/Add.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
@@ -30,6 +31,13 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile,
+    meta: { loginRequired: true }
+
+  },
+  {
+    path: '/add',
+    name: 'Add',
+    component: Add,
     meta: { loginRequired: true }
 
   },
