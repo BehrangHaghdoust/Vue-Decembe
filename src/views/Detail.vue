@@ -7,10 +7,12 @@
       <div>{{ article.content }}</div>
     </article>
     <div v-if="$store.state.isAuthenticated">
+
       <hr />
       <button class="btn btn-warning mr-3" @click="edit = !edit">Edit</button>
-      <button class="btn btn-danger">Remove</button>
+      <button class="btn btn-danger" @click="doRemove">Remove</button>
       <hr />
+
       <form @submit.prevent="doEdit" class="pb-5" v-if="edit">
         <div class="form-group">
           <label for="TitleInput">Title</label>
@@ -21,7 +23,6 @@
             v-model="title"
           />
         </div>
-
         <div class="form-group">
           <label for="DescriptionInput">Description</label>
           <textarea
@@ -40,9 +41,9 @@
             v-model="content"
           ></textarea>
         </div>
-
         <button class="btn btn-warning">Edit article</button>
       </form>
+
     </div>
   </div>
 </template>
@@ -82,6 +83,16 @@ export default {
          this.edit = false
          this.$router.push(`/article/${this.articles[index].slug}`)
     },
+    doRemove(){
+              let index = this.articles.findIndex(
+        (article) => article.slug == this.$route.params.slug
+      );
+    this.articles.splice(index , 1)
+       let database = JSON.stringify(this.articles)
+         localStorage.setItem('articles', database)
+
+         this.$router.push("/")
+    }
   },
 };
 </script>
